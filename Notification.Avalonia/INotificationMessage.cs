@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 
 namespace Avalonia.Notification
@@ -55,6 +56,26 @@ namespace Avalonia.Notification
         /// The badge visibility.
         /// </value>
         bool BadgeVisibility { get; set; }
+
+
+        /// <summary>
+        /// Gets or sets the type of the notification for use in styles.
+        /// </summary>
+        /// <value>
+        /// The Notification type.
+        /// </value>
+        /// <remarks>
+        /// The default <see cref="NotificationType"/> is <see cref="NotificationType.Information"/>
+        /// </remarks>
+        NotificationType Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the visibility of the notification type display
+        /// </summary>
+        /// <value>
+        /// The visibility of the notification type
+        /// </value>
+        bool TypeVisibility { get; set; }
 
         /// <summary>
         /// Gets or sets the button accent brush.
