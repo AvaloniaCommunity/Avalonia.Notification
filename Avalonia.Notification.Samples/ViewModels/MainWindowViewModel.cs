@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Avalonia.Controls;
-using Avalonia.Interactivity;
+using Avalonia.Controls.Notifications;
 using Avalonia.Layout;
 using Avalonia.Media;
 
@@ -25,6 +23,7 @@ namespace Avalonia.Notification.Samples.ViewModels
                 .CreateMessage()
                 .Accent("#F15B19")
                 .Background("#F15B19")
+                .HasType(NotificationType.Error)
                 .HasHeader("Lost connection to server")
                 .HasMessage("Reconnecting...")
                 .WithOverlay(new ProgressBar
@@ -47,6 +46,7 @@ namespace Avalonia.Notification.Samples.ViewModels
                 .CreateMessage()
                 .Accent("#E0A030")
                 .Background("#333")
+                .HasType(NotificationType.Warning)
                 .HasBadge("Warn")
                 .HasHeader("Error")
                 .HasMessage("Failed to retrieve data.")
@@ -61,6 +61,7 @@ namespace Avalonia.Notification.Samples.ViewModels
                 .CreateMessage()
                 .Accent("#1751C3")
                 .Background("#333")
+                .HasType(NotificationType.Information)
                 .HasBadge("Info")
                 .HasMessage("Update will be installed on next application restart.")
                 .Dismiss().WithButton("Update now", button => { })
@@ -76,6 +77,7 @@ namespace Avalonia.Notification.Samples.ViewModels
                 .Accent("#1751C3")
                 .Animates(true)
                 .Background("#333")
+                .HasType(NotificationType.Information)
                 .HasBadge("Info")
                 .HasMessage(
                     "Update will be installed on next application restart. This message will be dismissed after 5 seconds.")

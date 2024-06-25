@@ -18,6 +18,8 @@
             <cc:NotificationMessage TypeVisibility="True" Type="Warning" Header="Warning Notification" Message="Hmm something smells cooked around here"/>
 
             <cc:NotificationMessage TypeVisibility="True" Type="Error" Header="Error Notification" Message="Code is on fire. Run for cover."/>
+            
+            <cc:NotificationMessage TypeVisibility="False" Header="Typeless Notification" Message="This notification does not have a type."/>
         </StackPanel>
     </Design.PreviewWith>
     <Styles.Resources>
@@ -29,8 +31,137 @@
         <SolidColorBrush x:Key="NotificationSuccessColor" Color="#3BB346"/>
         <SolidColorBrush x:Key="NotificationWarningColor" Color="#FC8800"/>
         <SolidColorBrush x:Key="NotificationErrorColor" Color="#F93920"/>
-
-		<Geometry x:Key="InformationIconPath">M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z</Geometry>
+        
+        <!-- All icons are from IconDuck and licensed under the "Unlicense" -->
+        
+        <!-- https://iconduck.com/icons/12496/info-circle -->
+        <DrawingImage x:Key="InfoNotificationIcon">
+            <DrawingGroup>
+                <DrawingGroup.ClipGeometry>
+                    <RectangleGeometry Rect="0.0,0.0,21.0,21.0"/>
+                </DrawingGroup.ClipGeometry>
+                <DrawingGroup>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{StaticResource NotificationInformationColor}" LineJoin="Round" Thickness="1.0" LineCap="Round"/>
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="8.0" RadiusY="8.0" Center="10.5,10.5"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{StaticResource NotificationInformationColor}" LineJoin="Round" Thickness="1.0" LineCap="Round"/>
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="m 10.5 14.5 v -4"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource NotificationInformationColor}">
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="1.0" RadiusY="1.0" Center="10.5,7.5"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage>
+        
+        <!-- https://iconduck.com/icons/12599/warning-triangle -->
+        <DrawingImage x:Key="ErrorNotificationIcon">
+            <DrawingGroup>
+                <DrawingGroup.ClipGeometry>
+                    <RectangleGeometry Rect="0.0,0.0,21.0,21.0"/>
+                </DrawingGroup.ClipGeometry>
+                <DrawingGroup>
+                    <DrawingGroup.Transform>
+                        <MatrixTransform Matrix="1.0,0.0,0.0,1.0,1.0,1.0"/>
+                    </DrawingGroup.Transform>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{StaticResource NotificationErrorColor}" LineJoin="Round" Thickness="1.0" LineCap="Round"/>
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="m 9.5 0.5 l 9 16 h -18 z"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{StaticResource NotificationErrorColor}" LineJoin="Round" Thickness="1.0" LineCap="Round"/>
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="m 9.5 10.5 v -5"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource NotificationErrorColor}">
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="1.0" RadiusY="1.0" Center="9.5,13.5"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage>
+        
+        <!-- https://iconduck.com/icons/12428/check-circle -->
+        <DrawingImage x:Key="SuccessNotificationIcon">
+            <DrawingGroup>
+                <DrawingGroup.ClipGeometry>
+                    <RectangleGeometry Rect="0.0,0.0,21.0,21.0"/>
+                </DrawingGroup.ClipGeometry>
+                <DrawingGroup>
+                    <DrawingGroup.Transform>
+                        <MatrixTransform Matrix="1.0,0.0,0.0,1.0,2.0,2.0"/>
+                    </DrawingGroup.Transform>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{StaticResource NotificationSuccessColor}" LineJoin="Round" Thickness="1.0" LineCap="Round"/>
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="8.0" RadiusY="8.0" Center="8.5,8.5"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{StaticResource NotificationSuccessColor}" LineJoin="Round" Thickness="1.0" LineCap="Round"/>
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="m 5.5 9.5 l 2 2 l 5 -5"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage>
+        
+        <!-- https://iconduck.com/icons/12597/warning-circle?shared -->
+        <DrawingImage x:Key="WarningNotificationIcon">
+            <DrawingGroup>
+                <DrawingGroup.ClipGeometry>
+                    <RectangleGeometry Rect="0.0,0.0,21.0,21.0"/>
+                </DrawingGroup.ClipGeometry>
+                <DrawingGroup>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{StaticResource NotificationWarningColor}" LineJoin="Round" Thickness="1.0" LineCap="Round"/>
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="8.0" RadiusY="8.0" Center="10.5,10.5"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{StaticResource NotificationWarningColor}" LineJoin="Round" Thickness="1.0" LineCap="Round"/>
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <PathGeometry Figures="m 10.5 11.5 v -5"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="{StaticResource NotificationWarningColor}">
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry RadiusX="1.0" RadiusY="1.0" Center="10.5,14.5"/>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage>
     </Styles.Resources>
 
 
@@ -90,7 +221,9 @@
 
                         UseLayoutRounding="True">
                         <!--  Outer Grid  -->
-                        <Grid x:Name="outerGrid">
+                        <Grid x:Name="outerGrid" 
+                              ColumnDefinitions="Auto,*,Auto,Auto" 
+                              RowDefinitions="Auto,Auto,Auto">
                             <Grid.Styles>
                                 <!--  Accent Button Style  -->
 
@@ -154,17 +287,6 @@
                                     <Setter Property="VerticalAlignment" Value="Center" />
                                 </Style>
                             </Grid.Styles>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
 
                             <!--  Additional Content - Outer Grid  -->
                             <ContentControl
@@ -206,22 +328,16 @@
                                 Content="{TemplateBinding AdditionalContentMain}" />
 
                             <!--  Inner Grid  -->
-                            <Grid
-                                x:Name="innerGrid"
-                                Grid.Row="1"
-                                Grid.Column="1"
+                            <Grid x:Name="innerGrid"
+                                Grid.Row="1" Grid.Column="1"
                                 HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-								<!-- Type indicator grid -->
-                                <Grid
-                                    x:Name="typeIndicatorGrid"
+                                VerticalAlignment="Stretch" ColumnDefinitions="Auto,Auto,*">
+                                <!-- Type indicator grid -->
+                                <Grid x:Name="typeIndicatorGrid"
                                     Grid.Column="0">
-                                    <ContentPresenter Width="20" Height="20" Classes="notificationTypeIndicatorContainer"/>
+                                    <Viewbox VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                        <Image IsVisible="False" Width="25" Margin="5,0" x:Name="NotificationTypeImage"/>
+                                    </Viewbox>
                                 </Grid>
                                 <!--  Badge Grid  -->
                                 <Grid
@@ -253,7 +369,7 @@
                                 <!--  Text Grid  -->
                                 <Grid
                                     x:Name="textGrid"
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Margin="10,8"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch">
@@ -313,16 +429,24 @@
         </Setter>
     </Style>
 
-    <Style Selector="cc|NotificationMessage:information /template/ ContentPresenter.notificationTypeIndicatorContainer">
-        <Setter Property="Content">
-			<Template>
-				<Viewbox >
-                    <TextBlock>Hi</TextBlock>
-					<!-- <Path Stroke="{StaticResource NotificationInformationColor}" Data="{StaticResource InformationIconPath}"/> -->
-				</Viewbox>
-			</Template>
-
-		</Setter>
+    <Style Selector="cc|NotificationMessage:information /template/ Image#NotificationTypeImage">
+        <Setter Property="Source" Value="{StaticResource InfoNotificationIcon}"/>
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+    
+    <Style Selector="cc|NotificationMessage:success /template/ Image#NotificationTypeImage">
+        <Setter Property="Source" Value="{StaticResource SuccessNotificationIcon}"/>
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+    
+    <Style Selector="cc|NotificationMessage:warning /template/ Image#NotificationTypeImage">
+        <Setter Property="Source" Value="{StaticResource WarningNotificationIcon}"/>
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+    
+    <Style Selector="cc|NotificationMessage:error /template/ Image#NotificationTypeImage">
+        <Setter Property="Source" Value="{StaticResource ErrorNotificationIcon}"/>
+        <Setter Property="IsVisible" Value="True"/>
     </Style>
 
     <Style Selector="cc|NotificationMessageContainer">

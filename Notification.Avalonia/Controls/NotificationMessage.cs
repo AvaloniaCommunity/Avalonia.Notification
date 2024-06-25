@@ -502,6 +502,8 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
 
         this.Foreground = new BrushConverter().ConvertFromString("#DDDDDD") as IBrush;
         
+        UpdatePseudeClasses();
+        
         // This was only used in one style selector which could be rewritten to use the any descendants style selector
         //this.Classes.Add("notificationMessage");
     }
