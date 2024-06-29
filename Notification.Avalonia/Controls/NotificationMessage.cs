@@ -1,11 +1,10 @@
 ﻿using System.Collections.ObjectModel;
-using Avalonia.Animation;
 using Avalonia.Controls;
-using Avalonia.Controls.Presenters;
+using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Notifications;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Reactive;
-using Avalonia.Styling;
 
 namespace Avalonia.Notification.Controls;
 
@@ -14,8 +13,15 @@ namespace Avalonia.Notification.Controls;
 /// </summary>
 /// <seealso cref="INotificationMessage" />
 /// <seealso cref="Control" />
+[PseudoClasses(InformationPseudoClassName, SuccessPseudoClassName, WarningPseudoClassName, ErrorPseudoClassName)]
 public class NotificationMessage : TemplatedControl, INotificationMessage, INotificationAnimation
 {
+
+    private const string InformationPseudoClassName = ":information";
+    private const string SuccessPseudoClassName = ":success";
+    private const string WarningPseudoClassName = ":warning";
+    private const string ErrorPseudoClassName = ":error";
+
     /// <summary>
     /// Gets or sets the content of the overlay.
     /// </summary>
@@ -137,6 +143,13 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
         set => SetValue(BadgeVisibilityProperty, value);
     }
 
+    /// <inheritdoc cref="INotificationMessage.CloseButtonVisibility"/>
+    public bool CloseButtonVisibility
+    {
+        get => GetValue(CloseButtonVisibilityProperty);
+        set => SetValue(CloseButtonVisibilityProperty, value);
+    }
+
     /// <summary>
     /// Gets or sets the badge accent brush.
     /// </summary>
@@ -159,6 +172,25 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
     {
         get => (string)GetValue(BadgeTextProperty);
         set => SetValue(BadgeTextProperty, value);
+    }
+
+
+    /// <inheritdoc cref="INotificationMessage.Type"/>
+    public NotificationType Type
+    {
+        get => GetValue(TypeProperty);
+        set => SetValue(TypeProperty, value);
+    }
+
+
+    /// <inheritdoc cref="INotificationMessage.TypeVisibility"/>
+    /// <remarks>
+    /// The default value for this property is <see langword="true"/>
+    /// </remarks>
+    public bool TypeVisibility
+    {
+        get => GetValue(TypeVisibilityProperty);
+        set => SetValue(TypeVisibilityProperty, value);
     }
 
     /// <summary>
@@ -336,6 +368,12 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
     }
 
     /// <summary>
+    /// The close button visibility property.
+    /// </summary>
+    public static readonly StyledProperty<bool> CloseButtonVisibilityProperty =
+        AvaloniaProperty.Register<NotificationMessage, bool>(nameof(CloseButtonVisibility));
+    
+    /// <summary>
     /// The button accent brush property.
     /// </summary>
     public static readonly StyledProperty<IBrush> ButtonAccentBrushProperty =
@@ -346,7 +384,7 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
     /// </summary>
     public static readonly StyledProperty<bool> BadgeVisibilityProperty =
         AvaloniaProperty.Register<NotificationMessage, bool>("BadgeVisibility");
-
+    
     /// <summary>
     /// The badge accent brush property.
     /// </summary>
@@ -372,6 +410,18 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
 
         @this.BadgeVisibility = dependencyPropertyChangedEventArgs.NewValue != null;
     }
+
+    /// <summary>
+    /// The <see cref="Type"/> property
+    /// </summary>
+    public static readonly StyledProperty<NotificationType> TypeProperty =
+        AvaloniaProperty.Register<NotificationMessage, NotificationType>(nameof(Type));
+
+    /// <summary>
+    /// The <see cref="TypeVisibility"/> property
+    /// </summary>
+    public static readonly StyledProperty<bool> TypeVisibilityProperty =
+        AvaloniaProperty.Register<NotificationMessage, bool>(nameof(TypeVisibility), true);
 
     /// <summary>
     /// The header visibility property.
@@ -442,10 +492,14 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
     /// </summary>
     static NotificationMessage()
     {
-        AccentBrushProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<IBrush>>(x => AccentBrushPropertyChangedCallback(x.Sender, x)));
-        BadgeTextProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<string>>(x => BadgeTextPropertyChangedCallback(x.Sender, x)));
-        MessageProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<string>>(x => MessagePropertyChangesCallback(x.Sender, x)));
-        HeaderProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<string>>(x => HeaderPropertyChangesCallback(x.Sender, x)));
+        AccentBrushProperty.Changed.AddClassHandler<NotificationMessage>(AccentBrushPropertyChangedCallback);
+        BadgeTextProperty.Changed.AddClassHandler<NotificationMessage>(BadgeTextPropertyChangedCallback);
+        MessageProperty.Changed.AddClassHandler<NotificationMessage>(MessagePropertyChangesCallback);
+        HeaderProperty.Changed.AddClassHandler<NotificationMessage>(HeaderPropertyChangesCallback);
+
+        TypeProperty.Changed.AddClassHandler<NotificationMessage>((s, _) => s.UpdatePseudoClasses());
+        TypeVisibilityProperty.Changed.AddClassHandler<NotificationMessage>((s, _) => s.UpdatePseudoClasses());
+
         //TODO what is this
         // DefaultStyleKeyProperty.OverrideMetadata(typeof(NotificationMessage), new FrameworkPropertyMetadata(typeof(NotificationMessage)));
     }
@@ -460,6 +514,30 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
         Background = new SolidColorBrush(new Color(100, 0, 0, 0));
 
         this.Foreground = new BrushConverter().ConvertFromString("#DDDDDD") as IBrush;
-        this.Classes.Add("notificationMessage");
+        
+        UpdatePseudoClasses();
+        
+        // This was only used in one style selector which could be rewritten to use the any descendants style selector
+        //this.Classes.Add("notificationMessage");
     }
+
+    /// <summary>
+    /// This method updates the pseudo classes of the control when the <see cref="Type"/> or <see cref="TypeVisibility"/> property change
+    /// </summary>
+    private void UpdatePseudoClasses()
+    {
+        if (!TypeVisibility)
+        {
+            this.PseudoClasses.Set(InformationPseudoClassName, false);
+            this.PseudoClasses.Set(SuccessPseudoClassName, false);
+            this.PseudoClasses.Set(WarningPseudoClassName, false);
+            this.PseudoClasses.Set(ErrorPseudoClassName, false);
+            return;
+        }
+
+        this.PseudoClasses.Set(InformationPseudoClassName, Type == NotificationType.Information);
+        this.PseudoClasses.Set(SuccessPseudoClassName, Type == NotificationType.Success);
+        this.PseudoClasses.Set(WarningPseudoClassName, Type == NotificationType.Warning);
+        this.PseudoClasses.Set(ErrorPseudoClassName, Type == NotificationType.Error);
+    }  
 }

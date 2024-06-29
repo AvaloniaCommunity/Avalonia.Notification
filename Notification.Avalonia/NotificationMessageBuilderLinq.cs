@@ -1,4 +1,5 @@
-﻿using Avalonia.Media;
+﻿using Avalonia.Controls.Notifications;
+using Avalonia.Media;
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable RedundantEmptySwitchSection
@@ -10,6 +11,21 @@ namespace Avalonia.Notification;
 /// </summary>
 public static class NotificationMessageBuilderLinq
 {
+    /// <summary>
+    /// Sets the close button visibility.
+    /// </summary>
+    /// <param name="builder">The builder.</param>
+    /// <param name="closeButtonVisibility">The close button visibility</param>
+    /// <returns>Returns the notification message builder.</returns>
+    public static NotificationMessageBuilder HasCloseButtonVisibility(
+        this NotificationMessageBuilder builder,
+        bool closeButtonVisibility)
+    {
+        builder.SetCloseButtonVisibility(closeButtonVisibility);
+
+        return builder;
+    }
+    
     /// <summary>
     /// Sets the notification message background.
     /// </summary>
@@ -123,6 +139,36 @@ public static class NotificationMessageBuilderLinq
         string message)
     {
         builder.SetMessage(message);
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Sets the notification type.
+    /// </summary>
+    /// <param name="builder">The builder.</param>
+    /// <param name="type">The notification type.</param>
+    /// <returns>Returns the notification message builder.</returns>
+    public static NotificationMessageBuilder HasType(
+        this NotificationMessageBuilder builder,
+        NotificationType type)
+    {
+        builder.SetType(type);
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Sets the message type visibility
+    /// </summary>
+    /// <param name="builder">The builder</param>
+    /// <param name="typeVisibility">The notification type visibility</param>
+    /// <returns>Returns the notification message builder.</returns>
+    public static NotificationMessageBuilder HasTypeVisibility(
+        this NotificationMessageBuilder builder,
+        bool typeVisibility)
+    {
+        builder.SetTypeVisibility(typeVisibility);
 
         return builder;
     }

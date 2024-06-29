@@ -1,4 +1,5 @@
-﻿using Avalonia.Media;
+﻿using Avalonia.Controls.Notifications;
+using Avalonia.Media;
 
 namespace Avalonia.Notification;
 
@@ -33,6 +34,15 @@ public class NotificationMessageBuilder
         return new NotificationMessageBuilder();
     }
 
+    /// <summary>
+    /// Sets the close button visibility.
+    /// </summary>
+    /// <param name="closeButtonVisibility">The value of the close button visibility</param>
+    public void SetCloseButtonVisibility(bool closeButtonVisibility)
+    {
+        this.Message.CloseButtonVisibility = closeButtonVisibility;
+    }
+    
     /// <summary>
     /// Sets the header.
     /// </summary>
@@ -79,6 +89,29 @@ public class NotificationMessageBuilder
     public void SetAccent(IBrush accentBrush)
     {
         this.Message.AccentBrush = accentBrush;
+    }
+
+
+    /// <summary>
+    /// Sets the type.
+    /// </summary>
+    /// <remarks>
+    /// This also sets the <see cref="INotificationMessage.TypeVisibility"/> to <see langword="true"/> to make for cleaner code
+    /// </remarks>
+    /// <param name="type">The <see cref="NotificationType"/> used for the message.</param>
+    public void SetType(NotificationType type)
+    {
+        this.Message.Type = type;
+        this.Message.TypeVisibility = true;
+    }
+
+    /// <summary>
+    /// Sets the type visibility
+    /// </summary>
+    /// <param name="typeVisibility">The type visibility</param>
+    public void SetTypeVisibility(bool typeVisibility)
+    {
+        this.Message.TypeVisibility = typeVisibility;
     }
 
     /*/// <summary>
