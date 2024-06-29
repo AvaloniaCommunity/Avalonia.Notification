@@ -143,6 +143,13 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
         set => SetValue(BadgeVisibilityProperty, value);
     }
 
+    /// <inheritdoc cref="INotificationMessage.CloseButtonVisibility"/>
+    public bool CloseButtonVisibility
+    {
+        get => GetValue(CloseButtonVisibilityProperty);
+        set => SetValue(CloseButtonVisibilityProperty, value);
+    }
+
     /// <summary>
     /// Gets or sets the badge accent brush.
     /// </summary>
@@ -361,6 +368,12 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
     }
 
     /// <summary>
+    /// The close button visibility property.
+    /// </summary>
+    public static readonly StyledProperty<bool> CloseButtonVisibilityProperty =
+        AvaloniaProperty.Register<NotificationMessage, bool>(nameof(CloseButtonVisibility));
+    
+    /// <summary>
     /// The button accent brush property.
     /// </summary>
     public static readonly StyledProperty<IBrush> ButtonAccentBrushProperty =
@@ -371,7 +384,7 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
     /// </summary>
     public static readonly StyledProperty<bool> BadgeVisibilityProperty =
         AvaloniaProperty.Register<NotificationMessage, bool>("BadgeVisibility");
-
+    
     /// <summary>
     /// The badge accent brush property.
     /// </summary>
@@ -484,8 +497,8 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
         MessageProperty.Changed.AddClassHandler<NotificationMessage>(MessagePropertyChangesCallback);
         HeaderProperty.Changed.AddClassHandler<NotificationMessage>(HeaderPropertyChangesCallback);
 
-        TypeProperty.Changed.AddClassHandler<NotificationMessage>((s, _) => s.UpdatePseudeClasses());
-        TypeVisibilityProperty.Changed.AddClassHandler<NotificationMessage>((s, _) => s.UpdatePseudeClasses());
+        TypeProperty.Changed.AddClassHandler<NotificationMessage>((s, _) => s.UpdatePseudoClasses());
+        TypeVisibilityProperty.Changed.AddClassHandler<NotificationMessage>((s, _) => s.UpdatePseudoClasses());
 
         //TODO what is this
         // DefaultStyleKeyProperty.OverrideMetadata(typeof(NotificationMessage), new FrameworkPropertyMetadata(typeof(NotificationMessage)));
@@ -502,7 +515,7 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
 
         this.Foreground = new BrushConverter().ConvertFromString("#DDDDDD") as IBrush;
         
-        UpdatePseudeClasses();
+        UpdatePseudoClasses();
         
         // This was only used in one style selector which could be rewritten to use the any descendants style selector
         //this.Classes.Add("notificationMessage");
@@ -511,7 +524,7 @@ public class NotificationMessage : TemplatedControl, INotificationMessage, INoti
     /// <summary>
     /// This method updates the pseudo classes of the control when the <see cref="Type"/> or <see cref="TypeVisibility"/> property change
     /// </summary>
-    private void UpdatePseudeClasses()
+    private void UpdatePseudoClasses()
     {
         if (!TypeVisibility)
         {

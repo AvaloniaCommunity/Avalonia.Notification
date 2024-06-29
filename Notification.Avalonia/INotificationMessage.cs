@@ -56,6 +56,14 @@ namespace Avalonia.Notification
         /// The badge visibility.
         /// </value>
         bool BadgeVisibility { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the close button visibility.
+        /// </summary>
+        /// <value>
+        /// The close button visibility.
+        /// </value>
+        bool CloseButtonVisibility { get; set; }
 
 
         /// <summary>

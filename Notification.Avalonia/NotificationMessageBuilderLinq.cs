@@ -12,6 +12,21 @@ namespace Avalonia.Notification;
 public static class NotificationMessageBuilderLinq
 {
     /// <summary>
+    /// Sets the close button visibility.
+    /// </summary>
+    /// <param name="builder">The builder.</param>
+    /// <param name="closeButtonVisibility">The close button visibility</param>
+    /// <returns>Returns the notification message builder.</returns>
+    public static NotificationMessageBuilder HasCloseButtonVisibility(
+        this NotificationMessageBuilder builder,
+        bool closeButtonVisibility)
+    {
+        builder.SetCloseButtonVisibility(closeButtonVisibility);
+
+        return builder;
+    }
+    
+    /// <summary>
     /// Sets the notification message background.
     /// </summary>
     /// <param name="builder">The builder.</param>

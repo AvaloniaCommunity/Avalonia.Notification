@@ -35,6 +35,15 @@ public class NotificationMessageBuilder
     }
 
     /// <summary>
+    /// Sets the close button visibility.
+    /// </summary>
+    /// <param name="closeButtonVisibility">The value of the close button visibility</param>
+    public void SetCloseButtonVisibility(bool closeButtonVisibility)
+    {
+        this.Message.CloseButtonVisibility = closeButtonVisibility;
+    }
+    
+    /// <summary>
     /// Sets the header.
     /// </summary>
     /// <param name="header">The header.</param>
