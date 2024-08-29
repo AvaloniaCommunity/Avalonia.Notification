@@ -1,31 +1,36 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <LangVersion>preview</LangVersion>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageProjectUrl>https://github.com/AvaloniaCommunity/Avalonia.Notification</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/AvaloniaCommunity/Avalonia.Notification/blob/master/LICENSE</PackageLicenseUrl>
-        <RepositoryUrl>https://github.com/AvaloniaCommunity/Avalonia.Notification</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-        <PackageId>Notification.Avalonia</PackageId>
-        <Title>Notification.Avalonia</Title>
-        <Authors>Lary</Authors>
-        <RootNamespace>Avalonia.Notification</RootNamespace>
-        <PackageVersion>2.1.0</PackageVersion>
-    </PropertyGroup>
-    <ItemGroup>
-        <AvaloniaResource Include="**\*.xaml">
-            <SubType>Designer</SubType>
-        </AvaloniaResource>
-        <AvaloniaResource Include="Assets\*"/>
-        <AvaloniaResource Update="Views\MsBoxInputWindow.xaml">
-            <SubType>Designer</SubType>
-        </AvaloniaResource>
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.9" />
-    </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/AvaloniaCommunity/Avalonia.Notification</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/AvaloniaCommunity/Avalonia.Notification/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/AvaloniaCommunity/Avalonia.Notification</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageId>Notification.Avalonia</PackageId>
+    <Title>Notification.Avalonia</Title>
+    <Authors>Lary</Authors>
+    <RootNamespace>Avalonia.Notification</RootNamespace>
+    <PackageVersion>2.1.0</PackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+
+    <AvaloniaResource Include="Assets\*"/>
+
+    <AvaloniaResource Update="Views\MsBoxInputWindow.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.9" />
+  </ItemGroup>
+
 </Project>

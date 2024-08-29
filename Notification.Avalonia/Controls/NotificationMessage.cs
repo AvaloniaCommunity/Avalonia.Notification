@@ -1,11 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using Avalonia.Animation;
 using Avalonia.Controls;
-using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Reactive;
-using Avalonia.Styling;
 
 namespace Avalonia.Notification.Controls;
 

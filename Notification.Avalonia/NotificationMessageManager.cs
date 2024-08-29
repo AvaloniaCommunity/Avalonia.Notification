@@ -1,5 +1,3 @@
-using Avalonia.Animation;
-
 namespace Avalonia.Notification;
 
 /// <summary>
@@ -8,7 +6,7 @@ namespace Avalonia.Notification;
 /// <seealso cref="INotificationMessageManager" />
 public class NotificationMessageManager : AvaloniaObject, INotificationMessageManager
 {
-    private readonly List<INotificationMessage> queuedMessages = new List<INotificationMessage>();
+    private readonly List<INotificationMessage> queuedMessages = [];
 
 
     /// <summary>
