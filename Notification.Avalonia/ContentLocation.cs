@@ -10,5 +10,5 @@ public enum ContentLocation
     Left,
     Right,
     Main,
-    AboveBadge
+    AboveBadge,
 }

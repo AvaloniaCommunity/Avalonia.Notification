@@ -230,7 +230,7 @@ public static class NotificationMessageBuilderLinq
     /// <param name="builder">The builder.</param>
     /// <param name="callback">The callback.</param>
     /// <returns>
-    /// Returns the action that will call manager dismiss for notification 
+    /// Returns the action that will call manager dismiss for notification
     /// message builder when called and then call the callback action.
     /// </returns>
     private static Action<INotificationMessage> DismissBefore(
@@ -250,7 +250,7 @@ public static class NotificationMessageBuilderLinq
     /// <param name="builder">The builder.</param>
     /// <param name="callback">The callback.</param>
     /// <returns>
-    /// Returns the action that will call manager dismiss for notification 
+    /// Returns the action that will call manager dismiss for notification
     /// message in builder when button is clicked and then call the callback action.
     /// </returns>
     private static Action<INotificationMessageButton> DismissBefore(
@@ -294,39 +294,39 @@ public static class NotificationMessageBuilderLinq
         switch (contentLocation)
         {
             case ContentLocation.Top:
-            {
-                builder.SetAdditionalContentTop(additionalContent);
-                break;
-            }
+                {
+                    builder.SetAdditionalContentTop(additionalContent);
+                    break;
+                }
             case ContentLocation.Bottom:
-            {
-                builder.SetAdditionalContentBottom(additionalContent);
-                break;
-            }
+                {
+                    builder.SetAdditionalContentBottom(additionalContent);
+                    break;
+                }
             case ContentLocation.Left:
-            {
-                builder.SetAdditionalContentLeft(additionalContent);
-                break;
-            }
+                {
+                    builder.SetAdditionalContentLeft(additionalContent);
+                    break;
+                }
             case ContentLocation.Right:
-            {
-                builder.SetAdditionalContentRight(additionalContent);
-                break;
-            }
+                {
+                    builder.SetAdditionalContentRight(additionalContent);
+                    break;
+                }
             case ContentLocation.Main:
-            {
-                builder.SetAdditionalContentMain(additionalContent);
-                break;
-            }
+                {
+                    builder.SetAdditionalContentMain(additionalContent);
+                    break;
+                }
             case ContentLocation.AboveBadge:
-            {
-                builder.SetAdditionalContentOverBadge(additionalContent);
-                break;
-            }
+                {
+                    builder.SetAdditionalContentOverBadge(additionalContent);
+                    break;
+                }
             default:
-            {
-                break;
-            }
+                {
+                    break;
+                }
         }
 
 
